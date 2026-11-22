@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try {
+      const savedScheme = localStorage.getItem("color-scheme");
+      if (savedScheme === "light" || savedScheme === "dark") {
+        document.querySelector('meta[name="color-scheme"]').content = savedScheme;
+      }
+    } catch {}
+  </script>
+  <title>Zajęcia 1: Overview cyklu i Warstwa 1 (Fizyczna) | KN SPOOFERPHISH</title>
+  <meta name="description" content="Prezentacja na pierwsze spotkanie Koła Naukowego SPOOFERPHISH — Podstawy Sieci Komputerowych (ścieżka CCNA): mapa drogowa cyklu, Warstwa 1 OSI, okablowanie, urządzenia, Lab 1 w Cisco Packet Tracer i Mini-Quiz.">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a href="#deck" class="skip-link visually-hidden">Przejdź do treści prezentacji</a>
+
+  <header class="topbar">
+    <div class="topbar-brand">
+      <span class="brand-badge" aria-hidden="true">L1</span>
+      <span class="brand-title">KN SPOOFERPHISH • CCNA #1</span>
+    </div>
+
+    <div class="topbar-actions">
+      <button type="button" id="view-mode-btn" class="btn btn-ghost" aria-pressed="false">
+        <span class="btn-label-slides">Widok przewijany</span>
+        <span class="btn-label-scroll" hidden>Tryb slajdów</span>
+      </button>
+
+      <button type="button" id="overview-btn" class="btn btn-ghost" aria-haspopup="dialog">
+        Spis slajdów (<span id="slide-counter">1 / 15</span>)
+      </button>
+
+      <button type="button" id="theme-toggle-btn" class="btn btn-icon" aria-label="Zmień motyw kolorystyczny">
+        <span class="theme-option-to-dark">Ciemny motyw</span>
+        <span class="theme-option-to-light">Jasny motyw</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="deck" class="deck" tabindex="-1" data-view="slides">
+    <p id="live-announcer" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
+
+    <!-- SLAJD 1: START -->
+    <section id="slajd-1" class="slide slide--hero is-active" data-slide="1" data-title="Start: Overview cyklu i Warstwa 1">
+      <div class="slide-grid slide-grid--hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Koło Naukowe SPOOFERPHISH • Podstawy Sieci (Ścieżka CCNA)</p>
+          <h1 tabindex="-1">Zajęcia 1: Overview cyklu i&nbsp;Warstwa&nbsp;1 (Fizyczna)</h1>
+          <p class="lead">
+            Praktyczna droga <strong>od gołego kabla (L1) do zabezpieczonego ruchu aplikacji (L7)</strong>.
+            Dziś budujemy fundamenty fizyczne sieci i stawiamy pierwszy lab w Cisco Packet Tracerze.
+          </p>
+
+          <dl class="meta-pills">
+            <div>
+              <dt>Czas</dt>
+              <dd>90 minut</dd>
+            </div>
+            <div>
+              <dt>Narzędzie</dt>
+              <dd>Cisco Packet Tracer</dd>
+            </div>
+            <div>
+              <dt>Cel labu</dt>
+              <dd>Hub vs Switch + pierwszy <code>ping</code></dd>
+            </div>
+          </dl>
+
+          <div class="hero-cta">
+            <button type="button" class="btn btn-primary" data-goto="2">Rozpocznij prezentację →</button>
+            <a class="btn btn-secondary" href="https://github.com/Spoofer-Phish/szkolenie_sieci/blob/main/docs/Instrukcja_packetTracer.md" target="_blank" rel="noopener noreferrer">Instrukcja Packet Tracer (GitHub)</a>
+          </div>
+        </div>
+
+        <figure class="media-frame media-frame--hero">
+          <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Szafa rack z panelami krosowymi i przełącznikami">
+            <img
+              src="media/prezentacja_1/hero-rack-switches.jpg"
+              alt="Szafa rack 19-calowa z panelami krosowymi, przełącznikami Ethernet z zielonymi diodami oraz routerem Cisco na dole"
+              width="1280"
+              height="960"
+              fetchpriority="high"
+            >
+          </button>
+          <figcaption>Szafa rack w praktyce: panele krosowe (L1), przełączniki (L2) i router Cisco (L3).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- SLAJD 2: MAPA DROGOWA CYKLU -->
+    <section id="slajd-2" class="slide" data-slide="2" data-title="Mapa drogowa cyklu (L1 → L7)" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:00 – 00:10 • Overview semestru</p>
+        <h2 tabindex="-1">Mapa drogowa cyklu: od L1 do L7</h2>
+      </div>
+
+      <div class="table-scroll" role="region" aria-label="Tabela spotkań cyklu CCNA" tabindex="0">
+        <table class="data-table">
+          <caption>Plan 7 spotkań wzorowany na ścieżce Cisco CCNA</caption>
+          <thead>
+            <tr>
+              <th scope="col">Spotkanie</th>
+              <th scope="col">Temat przewodni (OSI)</th>
+              <th scope="col">Kluczowe zagadnienia</th>
+              <th scope="col">Lab praktyczny (PT / sprzęt)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="is-highlight-row">
+              <th scope="row">Zajęcia 1 (Dziś)</th>
+              <td><strong>Overview + Warstwa 1 (Fizyczna)</strong></td>
+              <td>Zadania i rodzaje sieci, topologie, domeny kolizyjne/rozgłoszeniowe, duplex, urządzenia, okablowanie, standardy L1 + wstęp MAC/IP</td>
+              <td>Sieć od zera w PT, eksperyment <strong>Hub vs Switch (kolizje w Simulation Mode)</strong>, pierwszy <code>ping</code>, zajawka routera</td>
+            </tr>
+            <tr>
+              <th scope="row">Zajęcia 2</th>
+              <td>Warstwa 2 (Łącza danych) &amp; Switching</td>
+              <td>Ramka Ethernet, tablica MAC, <strong>VLAN-y</strong>, Trunking (<strong>802.1Q</strong>), wstęp do <strong>STP</strong> (pętle L2)</td>
+              <td>Segmentacja sieci firmowej/akademickiej na VLAN-y (Admin, Studenci, Goście)</td>
+            </tr>
+            <tr>
+              <th scope="row">Zajęcia 3</th>
+              <td>Warstwa 3 cz. 1 — Adresacja &amp; Routing statyczny</td>
+              <td>IPv4, maski podsieci, <strong>subnetting (VLSM)</strong>, ARP, brama domyślna, routing statyczny, <strong>Router-on-a-Stick</strong></td>
+              <td>Podział puli adresowej dla oddziałów i spięcie VLAN-ów przez router</td>
+            </tr>
+            <tr>
+              <th scope="row">Zajęcia 4</th>
+              <td>Warstwa 3 cz. 2 — Routing dynamiczny</td>
+              <td>Tablica routingu, metryka vs Administrative Distance, link-state vs distance-vector, <strong>OSPFv2</strong>, <code>traceroute</code></td>
+              <td>Szkielet 3–4 routerów na OSPF + symulacja awarii łącza (redundancja)</td>
+            </tr>
+            <tr>
+              <th scope="row">Zajęcia 5</th>
+              <td>Wyższe warstwy (L4–L7) &amp; Usługi</td>
+              <td><strong>TCP vs UDP</strong> (3-way handshake, porty, okna), <strong>DHCP</strong>, <strong>DNS</strong>, <strong>NAT/PAT</strong>, HTTP/HTTPS</td>
+              <td>Serwer DHCP/DNS + analiza pakietów krok po kroku (Wireshark / PT)</td>
+            </tr>
+            <tr>
+              <th scope="row">Zajęcia 6</th>
+              <td>Network Security &amp; Hardening</td>
+              <td><strong>Port Security</strong> (MAC flooding), <strong>ACL</strong> (firewall bezstanowy), wstęp do firewalla stanowego i DHCP Snooping</td>
+              <td>Zabezpieczenie sieci przed podsłuchem i nieautoryzowanym dostępem</td>
+            </tr>
+            <tr>
+              <th scope="row">Zajęcia 7 (Bonus)</th>
+              <td>Troubleshooting &amp; Mini-CTF</td>
+              <td>Metodyka diagnostyki <em>Bottom-Up</em> (od L1 do L7)</td>
+              <td>Sieć z celowo zaszytymi błędami (zły kabel, VLAN, maska, ACL) na czas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SLAJD 3: AGENDA ZAJĘĆ 1 -->
+    <section id="slajd-3" class="slide" data-slide="3" data-title="Agenda Zajęć 1 (90 minut)" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:00 – 00:10 • Rozkład jazdy</p>
+        <h2 tabindex="-1">Agenda dzisiejszych zajęć (90 min)</h2>
+      </div>
+
+      <div class="split-layout">
+        <ol class="timeline-list">
+          <li>
+            <span class="time-tag">00:00 – 00:10 (10 min)</span>
+            <strong>Start i Mapa Drogowa</strong> — cel cyklu, plan semestru i weryfikacja odpalonego <em>Cisco Packet Tracera</em>.
+          </li>
+          <li>
+            <span class="time-tag">00:10 – 00:20 (10 min)</span>
+            <strong>Po co sieci i gdzie jesteśmy?</strong> — 4 filary CCNA, skale sieci (PAN–WAN), model OSI i metoda <em>Bottom-Up</em>.
+          </li>
+          <li>
+            <span class="time-tag">00:20 – 00:35 (15 min)</span>
+            <strong>Topologie, Domeny i Sprzęt</strong> — Bus/Ring vs Star/Mesh, duplex, domeny kolizyjne/rozgłoszeniowe, urządzenia + Cybersec.
+          </li>
+          <li>
+            <span class="time-tag">00:35 – 00:45 (10 min)</span>
+            <strong>Okablowanie, Standardy L1 i Most do L2/L3</strong> — skrętka, światłowód, IEEE 802.3, PoE, różnica MAC vs IP.
+          </li>
+          <li>
+            <span class="time-tag">00:45 – 00:50 (5 min)</span>
+            <strong>„Sprzęt w dłoń”</strong> — żywe rekwizyty na sali (UTP vs FTP, tester RJ-45, SFP + światłowód) i BHP lasera.
+          </li>
+          <li>
+            <span class="time-tag">00:50 – 01:25 (35 min)</span>
+            <strong>Lab 1 w Packet Tracerze</strong> — 4 etapy od kabla prostego/krosowanego po Hub vs Switch i zajawkę routera.
+          </li>
+          <li>
+            <span class="time-tag">01:25 – 01:30 (5 min)</span>
+            <strong>Mini-Quiz i Zamknięcie</strong> — 3 szybkie pytania sprawdzające, Cheat Sheet i zapowiedź Zajęć 2.
+          </li>
+        </ol>
+
+        <aside class="callout-card">
+          <h3>Checklista przed labem</h3>
+          <ul>
+            <li>Masz zainstalowany i uruchomiony <strong>Cisco Packet Tracer</strong> (logowanie kontem NetAcad).</li>
+            <li>W razie problemów zajrzyj do instrukcji w repozytorium (<code>docs/Instrukcja_packetTracer.md</code>).</li>
+            <li>Cel dzisiejszego spotkania: zrozumieć fizykę przesyłu bitów i zobaczyć kolizje na własne oczy.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SLAJD 4: PO CO SIECI I SKALE SIECI -->
+    <section id="slajd-4" class="slide" data-slide="4" data-title="Zadania sieci, 4 filary CCNA i rodzaje sieci" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:10 – 00:20 • Fundamenty</p>
+        <h2 tabindex="-1">Po co sieci? 4 filary CCNA i skale sieci</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--media-right">
+        <div class="content-stack">
+          <article class="card">
+            <h3>4 filary niezawodnej sieci (CCNA)</h3>
+            <div class="pill-grid">
+              <div class="mini-card">
+                <strong>Odporność (Fault Tolerance)</strong>
+                <span>Nadmiarowe łącza i ścieżki — awaria jednego elementu nie zrywa pracy.</span>
+              </div>
+              <div class="mini-card">
+                <strong>Skalowalność (Scalability)</strong>
+                <span>Rozbudowa o nowych użytkowników bez przebudowy całej architektury.</span>
+              </div>
+              <div class="mini-card">
+                <strong>Jakość usług (QoS)</strong>
+                <span>Priorytetyzacja ruchu (np. głos/wideo przed pobieraniem plików).</span>
+              </div>
+              <div class="mini-card">
+                <strong>Bezpieczeństwo (Security)</strong>
+                <span>Ochrona infrastruktury i danych (poufność, integralność, dostępność).</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Rodzaje sieci (wg zasięgu i dostępu)</h3>
+            <ul class="compact-list">
+              <li><strong>PAN</strong> — sieć osobista (Bluetooth, zegarek ↔ telefon, kilka metrów).</li>
+              <li><strong>LAN / WLAN</strong> — sieć lokalna (przewodowa / Wi-Fi w domu, biurze, na uczelni).</li>
+              <li><strong>MAN</strong> — sieć miejska (łączy kampusy lub oddziały w obrębie miasta).</li>
+              <li><strong>WAN</strong> — sieć rozległa (łączy miasta i kraje, np. Internet, łącza operatorskie).</li>
+              <li><strong>Intranet vs Extranet</strong> — sieć wyłącznie wewnętrzna vs kontrolowany dostęp dla partnerów z zewnątrz.</li>
+            </ul>
+          </article>
+        </div>
+
+        <figure class="media-frame">
+          <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Porty przełącznika Gigabit Ethernet z zielonymi diodami">
+            <img
+              src="media/prezentacja_1/server-room-cables.jpg"
+              alt="Zbliżenie na porty przełącznika Gigabit Ethernet z wpiętymi kablami sieciowymi oraz świecącymi zielonymi diodami LINK/ACT"
+              width="1280"
+              height="720"
+              loading="lazy"
+              fetchpriority="low"
+            >
+          </button>
+          <figcaption>Zielone diody LINK/ACT potwierdzają połączenie w Warstwie 1 — ale to dopiero początek diagnostyki.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- SLAJD 5: MODEL OSI I DIAGNOSTYKA BOTTOM-UP -->
+    <section id="slajd-5" class="slide" data-slide="5" data-title="Model OSI i diagnostyka Bottom-Up" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:10 – 00:20 • Wspólny język sieciowców</p>
+        <h2 tabindex="-1">Model OSI (7 warstw) i diagnostyka Bottom-Up</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--two-col">
+        <div class="card">
+          <h3>Stos 7 warstw OSI</h3>
+          <ol class="osi-stack" reversed>
+            <li class="osi-layer osi-layer--upper">
+              <span class="osi-num">L7</span>
+              <strong>Aplikacji</strong>
+              <span>HTTP, HTTPS, DNS, DHCP — interfejs dla programów</span>
+            </li>
+            <li class="osi-layer osi-layer--upper">
+              <span class="osi-num">L6</span>
+              <strong>Prezentacji</strong>
+              <span>Formatowanie danych, kompresja, szyfrowanie (TLS)</span>
+            </li>
+            <li class="osi-layer osi-layer--upper">
+              <span class="osi-num">L5</span>
+              <strong>Sesji</strong>
+              <span>Nawiązywanie, utrzymanie i zamykanie dialogu</span>
+            </li>
+            <li class="osi-layer osi-layer--mid">
+              <span class="osi-num">L4</span>
+              <strong>Transportowa</strong>
+              <span>TCP / UDP, numery portów, niezawodność (segmenty)</span>
+            </li>
+            <li class="osi-layer osi-layer--mid">
+              <span class="osi-num">L3</span>
+              <strong>Sieciowa</strong>
+              <span>Adresacja IP, routing między sieciami (pakiety)</span>
+            </li>
+            <li class="osi-layer osi-layer--mid">
+              <span class="osi-num">L2</span>
+              <strong>Łącza danych</strong>
+              <span>Adresy MAC, ramki Ethernet, switching (Switch)</span>
+            </li>
+            <li class="osi-layer osi-layer--focus">
+              <span class="osi-num">L1</span>
+              <strong>Fizyczna (Dziś!)</strong>
+              <span>Bity (0/1), napięcia, fale świetlne/radiowe, kable, złącza, Hub</span>
+            </li>
+          </ol>
+        </div>
+
+        <div class="content-stack">
+          <article class="card card--accent">
+            <h3>Metodyka Bottom-Up (od dołu do góry)</h3>
+            <p>
+              Gdy sieć „nie działa”, sprawdzamy ją po kolei od <strong>Warstwy 1 w górę</strong>:
+            </p>
+            <ol class="compact-list">
+              <li><strong>L1:</strong> Czy wtyczka siedzi w porcie? Czy kabel jest sprawny? Czy świeci dioda Link?</li>
+              <li><strong>L2:</strong> Czy switch widzi adres MAC? Czy port jest w dobrym VLAN-ie?</li>
+              <li><strong>L3:</strong> Czy host ma poprawny adres IP, maskę i bramę domyślną?</li>
+              <li><strong>L4–L7:</strong> Czy firewall nie blokuje portu? Czy usługa (DNS/HTTP) odpowiada?</li>
+            </ol>
+          </article>
+
+          <blockquote class="key-quote">
+            <p>„Zielona dioda na porcie to dopiero początek — oznacza tylko, że Warstwa 1 dogadała się fizycznie.”</p>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLAJD 6: TOPOLOGIE SIECI -->
+    <section id="slajd-6" class="slide" data-slide="6" data-title="Topologie fizyczne: historyczne vs współczesne" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:20 – 00:35 • Architektura połączeń</p>
+        <h2 tabindex="-1">Topologie sieci: dlaczego stare upadły?</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--media-right">
+        <div class="content-stack">
+          <article class="card">
+            <h3>Topologie historyczne (w LAN praktycznie martwe)</h3>
+            <ul class="compact-list">
+              <li>
+                <strong>Magistrala (Bus):</strong> wszystkie hosty na jednym wspólnym koncentryku (10BASE2).
+                <em>Upadek:</em> pojedyncze przerwanie kabla lub brak terminatora 50 Ω kładzie całą sieć; jedno medium = ciągłe kolizje.
+              </li>
+              <li>
+                <strong>Pierścień (Ring):</strong> stacje połączone w zamkniętą pętlę (np. Token Ring).
+                <em>Upadek:</em> niska elastyczność okablowania, wyższy koszt i wrażliwość na przerwanie pętli.
+              </li>
+            </ul>
+          </article>
+
+          <article class="card card--accent">
+            <h3>Topologie współczesne</h3>
+            <ul class="compact-list">
+              <li>
+                <strong>Gwiazda (Star / Extended Star):</strong> każdy komputer biegnie osobnym kablem do centralnego <strong>Switcha</strong>.
+                Awaria jednego kabla izoluje tylko jedno stanowisko.
+              </li>
+              <li>
+                <strong>Siatka (Mesh — pełna lub częściowa):</strong> wiele połączeń między węzłami szkieletowymi — maksymalna odporność na awarie w data center i WAN.
+              </li>
+            </ul>
+          </article>
+        </div>
+
+        <figure class="media-frame">
+          <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Trójnik BNC z kablem koncentrycznym">
+            <img
+              src="media/prezentacja_1/bnc-coaxial-tee.jpg"
+              alt="Metalowy trójnik BNC z podłączonym czarnym kablem koncentrycznym używany dawniej w sieciach 10BASE2"
+              width="1280"
+              height="720"
+              loading="lazy"
+              fetchpriority="low"
+            >
+          </button>
+          <figcaption>Trójnik BNC z epoki topologii magistrali (10BASE2) — odłączenie go przerywało wspólną szynę całej sieci.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- SLAJD 7: TRYBY TRANSMISJI I DOMENY -->
+    <section id="slajd-7" class="slide" data-slide="7" data-title="Tryby transmisji i domeny kolizyjna vs rozgłoszeniowa" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:20 – 00:35 • Kluczowa teoria CCNA</p>
+        <h2 tabindex="-1">Tryby transmisji oraz domeny sieciowe</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--two-col">
+        <article class="card">
+          <h3>Tryby transmisji</h3>
+          <dl class="definition-cards">
+            <div>
+              <dt>Simplex</dt>
+              <dd>Ruch wyłącznie w jedną stronę (np. nadajnik TV/radio, klasyczna myszka).</dd>
+            </div>
+            <div>
+              <dt>Half-Duplex</dt>
+              <dd>W obie strony, ale <strong>nie naraz</strong> (jak krótkofalówka). Wymaga arbitrażu kolizji: <strong>CSMA/CD</strong> — słuchaj przed nadaniem, wykryj kolizję, wycofaj się na losowy czas.</dd>
+            </div>
+            <div>
+              <dt>Full-Duplex</dt>
+              <dd>Wysyłanie i odbiór <strong>jednocześnie</strong> (osobne pary przewodów / włókna). Brak kolizji — standard na portach Switcha.</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="card">
+          <h3>Domena kolizyjna vs rozgłoszeniowa</h3>
+          <dl class="definition-cards">
+            <div>
+              <dt>Domena kolizyjna (Collision Domain)</dt>
+              <dd>Segment sieci, w którym ramki wysłane jednocześnie mogą się zderzyć. Współdzielone medium (Hub, magistrala) = <strong>1 wspólna domena</strong>.</dd>
+            </div>
+            <div>
+              <dt>Domena rozgłoszeniowa (Broadcast Domain)</dt>
+              <dd>Obszar, do którego docierają ramki <code>Broadcast</code> (np. zapytania ARP <code>FF:FF:FF:FF:FF:FF</code>). Switche domyślnie rozsyłają broadcast na wszystkie porty (poza źródłowym).</dd>
+            </div>
+          </dl>
+
+          <blockquote class="key-quote">
+            <p><strong>Złota zasada CCNA:</strong> Switch tnie domeny kolizyjne (każdy port to osobna domena), a Router tnie domeny rozgłoszeniowe.</p>
+          </blockquote>
+        </article>
+      </div>
+    </section>
+
+    <!-- SLAJD 8: PRZEGLĄD URZĄDZEŃ I CYBERSEC -->
+    <section id="slajd-8" class="slide" data-slide="8" data-title="Urządzenia sieciowe i wstawka Cybersec" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:20 – 00:35 • Sprzęt aktywny i bezpieczeństwo</p>
+        <h2 tabindex="-1">Urządzenia sieciowe: od Repeatera do Routera</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--two-col">
+        <div class="content-stack">
+          <ul class="device-list">
+            <li><strong>Repeater (L1):</strong> regeneruje i wzmacnia osłabiony sygnał elektryczny/optyczny.</li>
+            <li><strong>Hub (L1):</strong> wieloportowy repeater — powiela każdy bit na <strong>wszystkie pozostałe porty</strong> (Half-Duplex, 1 domena kolizyjna).</li>
+            <li><strong>Bridge / Switch (L2):</strong> uczy się adresów <strong>MAC</strong>, przesyła ramkę tylko na właściwy port (Full-Duplex, tnie domeny kolizyjne).</li>
+            <li><strong>Router (L3):</strong> kieruje pakiety na podstawie adresów <strong>IP</strong> między różnymi podsieciami (tnie domeny rozgłoszeniowe).</li>
+            <li><strong>Access Point — AP (L1/L2):</strong> bezprzewodowy punkt dostępowy (współdzielone medium radiowe = znów Half-Duplex w eterze).</li>
+          </ul>
+
+          <aside class="callout-card callout-card--warn">
+            <h3>Wstawka Cybersec: Hub vs Network TAP</h3>
+            <p>
+              Na starym Hubie dowolny wpięty komputer mógł włączyć tryb <em>promiscuous</em> i <strong>pasywnie podsłuchiwać ruch innych</strong>.
+              Nowoczesne switche to utrudniają — dlatego w audytach i SOC stosuje się fizyczne <strong>Network TAP-y</strong> lub <em>Port Mirroring (SPAN)</em>.
+            </p>
+          </aside>
+        </div>
+
+        <div class="media-pair">
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Koncentrator Netgear DS108 Hub z diodą kolizji">
+              <img
+                src="media/prezentacja_1/netgear-hub.jpg"
+                alt="8-portowy koncentrator sieciowy Netgear DS108 Hub z wyraźnie oznaczoną diodą Col (Collision) po lewej stronie"
+                width="1280"
+                height="966"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Netgear Hub DS108 — zwróć uwagę na fizyczną diodę <strong>Col</strong> (kolizje) oraz wskaźnik zajętości pasma.</figcaption>
+          </figure>
+
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Przełączniki Cisco Catalyst w szafie rack">
+              <img
+                src="media/prezentacja_1/cisco-catalyst-rack.jpg"
+                alt="Przełączniki Cisco Catalyst zamontowane w szafie rack z kolorowymi kablami Ethernet oraz gniazdami SFP po prawej"
+                width="1280"
+                height="960"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Przełączniki Cisco Catalyst w szafie rack — każdy port to osobna domena kolizyjna + sloty SFP na uplink.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLAJD 9: OKABLOWANIE HISTORYCZNE I SKRĘTKA UTP/FTP -->
+    <section id="slajd-9" class="slide" data-slide="9" data-title="Kable historyczne, konsola i budowa skrętki (UTP vs FTP)" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:35 – 00:45 • Okablowanie miedziane</p>
+        <h2 tabindex="-1">Kable serwisowe i fizyka skrętki (UTP vs FTP)</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--two-col">
+        <div class="content-stack">
+          <article class="card">
+            <h3>Kable historyczne i serwisowe</h3>
+            <ul class="compact-list">
+              <li><strong>Koncentryk (BNC):</strong> dawne sieci 10BASE2/10BASE5 (dziś TV/kablówka).</li>
+              <li><strong>Serial (szeregowy):</strong> dawne łącza WAN router ↔ router (zegar DCE/DTE).</li>
+              <li><strong>Kabel konsolowy (Rollover):</strong> płaski niebieski przewód (RJ-45 ↔ DB-9 / USB) do wstępnej konfiguracji CLI switcha i routera bez udziału sieci IP.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Fizyka skrętki: dlaczego pary są skręcone?</h3>
+            <ul class="compact-list">
+              <li>Skręcenie żył znosi wzajemne pole magnetyczne — ogranicza <strong>Crosstalk</strong> (przesłuchy między parami) i zakłócenia z zewnątrz (<strong>EMI</strong>).</li>
+              <li><strong>UTP</strong> (<em>Unshielded</em>): bez ekranu, lżejsza i tańsza; w Cat 6 zawiera plastikowy <strong>krzyżyk</strong> (separator par).</li>
+              <li><strong>FTP / STP</strong> (<em>Foiled / Shielded</em>): dodatkowa <strong>folia ekranująca</strong> + żyła uziemiająca (drain wire) do środowisk przemysłowych o silnym EMI.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="media-trio">
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Kabel konsolowy Cisco Rollover">
+              <img
+                src="media/prezentacja_1/cisco-console-cable.jpg"
+                alt="Płaski błękitny kabel konsolowy Cisco Rollover ze złączem DB-9 po jednej stronie i wtykiem RJ-45 po drugiej"
+                width="1280"
+                height="960"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Kabel konsolowy Cisco (Rollover) — dostęp do CLI „z pudełka”.</figcaption>
+          </figure>
+
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Przekrój kabla UTP Cat6">
+              <img
+                src="media/prezentacja_1/cat6-utp-cross-section.jpg"
+                alt="Makroskopowy przekrój kabla UTP Cat6 pokazujący 4 pary przewodów rozdzielone plastikowym krzyżykiem"
+                width="1280"
+                height="960"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Przekrój UTP Cat6: widoczny <strong>krzyżyk</strong> redukujący przesłuchy.</figcaption>
+          </figure>
+
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Przekrój ekranowanego kabla Cat6">
+              <img
+                src="media/prezentacja_1/cat6-stp-cross-section.jpg"
+                alt="Makroskopowy przekrój ekranowanego kabla Cat6 pokazujący metaliczną folię wokół par, żyłę uziemiającą oraz separator"
+                width="1280"
+                height="960"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Przekrój FTP/STP Cat6: dodatkowo <strong>folia ekranująca</strong> i drut uziemiający.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLAJD 10: KATEGORIE, T568A/B, AUTO-MDIX, LIMIT 100M -->
+    <section id="slajd-10" class="slide" data-slide="10" data-title="Kategorie skrętki, T568A/B, Auto-MDIX i limit 100 m" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:35 – 00:45 • Parametry miedzi</p>
+        <h2 tabindex="-1">Kategorie skrętki, standardy T568A/B i limit 100 m</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--media-right">
+        <div class="content-stack">
+          <div class="mini-grid">
+            <article class="card">
+              <h3>Kategorie i budowa żył</h3>
+              <ul class="compact-list">
+                <li><strong>Cat 5e:</strong> 1 Gbps (100 MHz) do 100 m.</li>
+                <li><strong>Cat 6:</strong> 1 Gbps do 100 m (10 Gbps do ~55 m, 250 MHz).</li>
+                <li><strong>Cat 6A:</strong> pełne 10 Gbps do 100 m (500 MHz).</li>
+                <li><strong>Drut (Solid)</strong> — sztywny, do tras w ścianach i patchpaneli; <strong>Linka (Stranded)</strong> — giętka, na patchcordy.</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>T568A/B, Auto-MDIX i zasięg</h3>
+              <ul class="compact-list">
+                <li><strong>Kabel prosty (Straight-Through):</strong> T568B ↔ T568B (lub A ↔ A) — różne urządzenia (PC ↔ Switch).</li>
+                <li><strong>Kabel krosowany (Cross-Over):</strong> T568A ↔ T568B — urządzenia tego samego typu (PC ↔ PC, Switch ↔ Switch).</li>
+                <li><strong>Auto-MDIX:</strong> współczesne porty Gigabit same wykrywają i zamieniają pary TX/RX.</li>
+                <li><strong>Limit standardu Ethernet: 100 m</strong> (90 m trasy stałej + 2×5 m patchcordy).</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="card">
+            <h3>Kolejność żył we wtyku RJ-45 — standard T568B (od lewej, zatrzask od spodu)</h3>
+            <ol class="pinout-strip">
+              <li class="pin pin--wo"><span class="pin-num">1</span><span>Biało-pom.</span></li>
+              <li class="pin pin--o"><span class="pin-num">2</span><span>Pomarańcz.</span></li>
+              <li class="pin pin--wg"><span class="pin-num">3</span><span>Biało-ziel.</span></li>
+              <li class="pin pin--b"><span class="pin-num">4</span><span>Niebieski</span></li>
+              <li class="pin pin--wb"><span class="pin-num">5</span><span>Biało-nieb.</span></li>
+              <li class="pin pin--g"><span class="pin-num">6</span><span>Zielony</span></li>
+              <li class="pin pin--wbr"><span class="pin-num">7</span><span>Biało-brąz.</span></li>
+              <li class="pin pin--br"><span class="pin-num">8</span><span>Brązowy</span></li>
+            </ol>
+          </div>
+        </div>
+
+        <figure class="media-frame">
+          <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Wtyk RJ-45 zaciśnięty według T568B">
+            <img
+              src="media/prezentacja_1/rj45-t568b-plug.jpg"
+              alt="Zbliżenie na przezroczysty wtyk RJ-45 z zaciśniętymi przewodami w kolejności T568B"
+              width="1280"
+              height="720"
+              loading="lazy"
+              fetchpriority="low"
+            >
+          </button>
+          <figcaption>Zaciśnięty wtyk RJ-45 w układzie <strong>T568B</strong> — widać pary 1–2 (pomarańczowe) i 3–6 (zielone).</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- SLAJD 11: ŚWIATŁOWODY I CYBERSEC TEMPEST -->
+    <section id="slajd-11" class="slide" data-slide="11" data-title="Światłowody SMF vs MMF, złącza LC/SC i TEMPEST" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:35 – 00:45 • Transmisja optyczna</p>
+        <h2 tabindex="-1">Światłowody: SMF vs MMF, złącza i Cybersec</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--two-col">
+        <div class="content-stack">
+          <div class="mini-grid">
+            <article class="card">
+              <h3>SMF (Single-Mode, żółty)</h3>
+              <ul class="compact-list">
+                <li><strong>Źródło:</strong> Laser; rdzeń ~9 µm (jedna ścieżka światła).</li>
+                <li><strong>Zasięg:</strong> kilometry / dziesiątki km (między budynkami, WAN).</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>MMF (Multi-Mode, pomarańcz. / turkus)</h3>
+              <ul class="compact-list">
+                <li><strong>Źródło:</strong> LED / VCSEL; rdzeń 50 lub 62,5 µm.</li>
+                <li><strong>Zasięg:</strong> do kilkuset metrów (szafa ↔ szafa, data center), tańsza optyka.</li>
+              </ul>
+            </article>
+          </div>
+
+          <article class="card">
+            <h3>Złącza LC/SC i zalety optyki</h3>
+            <ul class="compact-list">
+              <li><strong>LC (Lucent Connector):</strong> kompaktowe złącze z zatrzaskiem — standard w modułach <strong>SFP / SFP+</strong>.</li>
+              <li><strong>SC (Subscriber Connector):</strong> większe, kwadratowe złącze typu <em>push-pull</em> (częste w panelach i u operatorów).</li>
+              <li><strong>Izolacja galwaniczna:</strong> szkło nie przewodzi prądu — brak pętli mas i przepięć od wyładowań między budynkami.</li>
+            </ul>
+          </article>
+
+          <aside class="callout-card callout-card--accent">
+            <h3>Wstawka Cybersec: brak emisji EM (TEMPEST)</h3>
+            <p>
+              Światłowód nie promieniuje falami elektromagnetycznymi na zewnątrz — jest odporny na zakłócenia EMI i pasywny podsłuch radiowy (TEMPEST).
+            </p>
+          </aside>
+        </div>
+
+        <div class="media-pair">
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Patchcordy światłowodowe SMF i MMF">
+              <img
+                src="media/prezentacja_1/fiber-smf-mmf-cords.jpg"
+                alt="Żółty patchcord światłowodowy Single-Mode (SMF) oraz pomarańczowy Multi-Mode (MMF) oba zakończone złączami dupleks LC"
+                width="1280"
+                height="910"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Kolory osłon: żółty = <strong>SMF</strong> (niebieskie wtyki LC), pomarańczowy = <strong>MMF</strong> (beżowe wtyki LC).</figcaption>
+          </figure>
+
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Porównanie złączy LC i SC">
+              <img
+                src="media/prezentacja_1/lc-sc-connectors.jpg"
+                alt="Porównanie złączy światłowodowych dupleks LC po lewej i większych kwadratowych złączy SC po prawej"
+                width="1002"
+                height="969"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Porównanie gabarytów złączy światłowodowych: smukłe <strong>LC</strong> (lewa) vs kwadratowe <strong>SC</strong> (prawa).</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLAJD 12: STANDARDY L1 I MOST DO L2/L3 -->
+    <section id="slajd-12" class="slide" data-slide="12" data-title="Standardy L1 i różnica między MAC a IP" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:35 – 00:45 • Parametry łącza i adresacja</p>
+        <h2 tabindex="-1">Standardy Warstwy 1 oraz most do L2/L3 (MAC vs IP)</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--two-col">
+        <article class="card">
+          <h3>Standardy i mechanizmy L1</h3>
+          <ul class="compact-list">
+            <li><strong>IEEE 802.3:</strong> rodzina standardów przewodowego Ethernetu (określa m.in. sygnalizację L1 i dostęp do medium).</li>
+            <li><strong>Kodowanie liniowe:</strong> sposób zamiany bitów <code>0/1</code> na impulsy napięcia lub światła (np. Manchester, 8b/10b, PAM) i utrzymanie synchronizacji zegara.</li>
+            <li><strong>Auto-Negotiation:</strong> automatyczne uzgodnienie prędkości (10/100/1000 Mbps) i trybu duplexu po podpięciu kabla.</li>
+            <li><strong>PoE (Power over Ethernet, 802.3af/at/bt):</strong> przesył zasilania tym samym kablem UTP/FTP (np. dla kamer IP, telefonów VoIP i punktów AP).</li>
+          </ul>
+        </article>
+
+        <article class="card card--accent">
+          <h3>Minimum z L2/L3 potrzebne do labu: MAC vs IP</h3>
+          <div class="compare-boxes">
+            <div class="compare-box">
+              <h4>Adres MAC (Warstwa 2)</h4>
+              <p><strong>48-bitowy</strong> identyfikator sprzętowy karty sieciowej (zapis szesnastkowy, np. <code>00:1A:2B:3C:4D:5E</code>).</p>
+              <p class="muted">Działa tylko w lokalnej sieci LAN (widzi go Switch).</p>
+            </div>
+            <div class="compare-box">
+              <h4>Adres IP (Warstwa 3)</h4>
+              <p><strong>Logiczny</strong> adres przypisywany systemowi (np. <code>192.168.1.10/24</code>).</p>
+              <p class="muted">Identyfikuje hosta i podsieć — umożliwia routing (widzi go Router).</p>
+            </div>
+          </div>
+          <p class="note-line">
+            <strong>Analogia:</strong> MAC jest jak numer PESEL urządzenia, a IP jak adres pocztowy (ulica + miasto).
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SLAJD 13: SPRZĘT W DŁOŃ (PRZERWA AKTYWNA) -->
+    <section id="slajd-13" class="slide" data-slide="13" data-title="Sprzęt w dłoń — przerwa aktywna i BHP" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:45 – 00:50 • Przerwa aktywna (5 min)</p>
+        <h2 tabindex="-1">„Sprzęt w dłoń” — rekwizyty na sali</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--two-col">
+        <div class="content-stack">
+          <article class="card">
+            <h3>Co krąży po sali?</h3>
+            <ol class="compact-list">
+              <li><strong>Skrętka UTP vs FTP:</strong> obejrzyjcie z bliska plastikowy krzyżyk (Cat6) oraz folię ekranującą.</li>
+              <li><strong>Tester kabli RJ-45 + uszkodzony patchcord:</strong> zobaczcie, jak diody 1–8 sygnalizują przerwę lub zamienione żyły.</li>
+              <li><strong>Moduł SFP + światłowód LC–LC:</strong> przymierzcie mały zatrzask LC do wkładki optycznej.</li>
+            </ol>
+          </article>
+
+          <aside class="callout-card callout-card--danger">
+            <h3>Złota zasada BHP optyki</h3>
+            <p>
+              <strong>NIGDY nie patrzymy w końcówkę aktywnego światłowodu ani w otwarty port SFP!</strong>
+              Światło lasera (np. 850 nm / 1310 nm) jest niewidzialne dla ludzkiego oka — nie działa odruch mrugania, a wiązka może trwale uszkodzić siatkówkę.
+            </p>
+          </aside>
+        </div>
+
+        <div class="media-pair">
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Tester kabli RJ-45 i narzędzia sieciowe">
+              <img
+                src="media/prezentacja_1/cable-tester-kit.jpg"
+                alt="Walizka narzędziowa z testerem kabli RJ-45 NS-468, zaciskarką, ściągaczem izolacji i nożem LSA"
+                width="1280"
+                height="960"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Tester kabli RJ-45 (Master/Remote) i zaciskarka — podstawowa diagnoza Warstwy 1 w praktyce.</figcaption>
+          </figure>
+
+          <figure class="media-frame">
+            <button type="button" class="media-zoom-btn" aria-label="Powiększ zdjęcie: Moduł optyczny SFP z etykietą lasera">
+              <img
+                src="media/prezentacja_1/sfp-transceiver-lc.jpg"
+                alt="Moduł SFP LevelOne 1000BASE-SX z etykietą Class 1 Laser 850nm MMF 550m oraz złączem LC"
+                width="1280"
+                height="972"
+                loading="lazy"
+                fetchpriority="low"
+              >
+            </button>
+            <figcaption>Moduł SFP z wyraźnym oznaczeniem: <code>LC MMF 550m • Class 1 Laser 850nm</code>.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLAJD 14: LAB 1 W PACKET TRACERZE -->
+    <section id="slajd-14" class="slide" data-slide="14" data-title="Lab 1 w Cisco Packet Tracerze (35 min)" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:50 – 01:25 • Część praktyczna</p>
+        <h2 tabindex="-1">Lab 1 w Cisco Packet Tracerze (4 etapy)</h2>
+      </div>
+
+      <div class="lab-grid">
+        <article class="card lab-step">
+          <span class="step-badge">Etap 1 • 5 min</span>
+          <h3>PC ↔ PC: prosty vs krosowany</h3>
+          <p>Połącz dwa komputery z ręcznie ustawionymi adresami IP (np. <code>192.168.1.1/24</code> i <code>.2/24</code>). Porównaj zachowanie kabla prostego i krosowanego oraz wykonaj pierwszy <code>ping</code>.</p>
+        </article>
+
+        <article class="card lab-step">
+          <span class="step-badge">Etap 2 • 15 min</span>
+          <h3>Eksperyment Hub vs Switch</h3>
+          <p>Przełącz się na tryb <strong>Simulation</strong>:</p>
+          <ul class="compact-list">
+            <li>Wyślij pakiety przez <strong>Hub</strong>: obserwuj <em>ARP broadcast</em> i wywołaj jednoczesną wysyłkę → <strong>ikona płomienia (kolizja!)</strong>.</li>
+            <li>Podmień Hub na <strong>Switch 2960</strong> → powtórz test i zobacz brak kolizji.</li>
+          </ul>
+        </article>
+
+        <article class="card lab-step">
+          <span class="step-badge">Etap 3 • 5 min</span>
+          <h3>Drugi Switch + SFP + Światłowód</h3>
+          <p>Dodaj drugi switch, wyłącz zasilanie lub użyj modularnego switcha PT (<code>PT-Switch</code> / moduły <code>PT-SWITCH-NM-1FGE</code>), zamontuj wkładki <strong>SFP</strong> i zepnij switche pomarańczowym światłowodem.</p>
+        </article>
+
+        <article class="card lab-step">
+          <span class="step-badge">Etap 4 • 10 min</span>
+          <h3>Zajawka L3: Router wchodzi do gry</h3>
+          <p>Podepnij PC z innej podsieci (<code>192.168.2.10/24</code>). Mimo <strong>zielonych diod</strong> <code>ping</code> do <code>192.168.1.x</code> nie przejdzie! Dodaj <strong>Router</strong> jako bramę między sieciami.</p>
+        </article>
+      </div>
+
+      <aside class="callout-card callout-card--warn">
+        <h3>Wstawka Cybersec (pytanie otwarte po Etapie 2)</h3>
+        <p>
+          Widzieliście w Simulation Mode, że komputer pyta przez broadcast: <em>„Kto ma IP 192.168.1.2?”</em> i ufa pierwszej odpowiedzi ARP bez żadnej weryfikacji.
+          Co się stanie, jeśli atakujący odpowie szybciej swoim adresem MAC? → Zapowiedź <strong>ARP Spoofingu</strong>!
+        </p>
+      </aside>
+    </section>
+
+    <!-- SLAJD 15: MINI-QUIZ I ZAMKNIĘCIE -->
+    <section id="slajd-15" class="slide" data-slide="15" data-title="Mini-Quiz i zapowiedź Zajęć 2" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">01:25 – 01:30 • Podsumowanie</p>
+        <h2 tabindex="-1">Mini-Quiz sprawdzający i zamknięcie</h2>
+      </div>
+
+      <div class="quiz-grid" id="mini-quiz">
+        <article class="card quiz-card" data-question="1" data-correct="b">
+          <h3>1. Switch 2960 + 4 podpięte komputery</h3>
+          <p>Ile domen kolizyjnych i rozgłoszeniowych ma ta sieć?</p>
+          <div class="quiz-options">
+            <button type="button" class="quiz-opt" data-choice="a">1 domena kolizyjna i 4 rozgłoszeniowe</button>
+            <button type="button" class="quiz-opt" data-choice="b">4 domeny kolizyjne i 1 rozgłoszeniowa</button>
+            <button type="button" class="quiz-opt" data-choice="c">1 domena kolizyjna i 1 rozgłoszeniowa</button>
+          </div>
+          <p class="quiz-feedback" hidden>
+            <strong>Odpowiedź:</strong> <strong>4 domeny kolizyjne</strong> (każdy aktywny port switcha to osobna domena) i <strong>1 domena rozgłoszeniowa</strong>.
+          </p>
+        </article>
+
+        <article class="card quiz-card" data-question="2" data-correct="a">
+          <h3>2. Zielona dioda, brak pingu</h3>
+          <p>Kabel sprawny, diody świecą na zielono, ale <code>ping</code> do innej podsieci nie przechodzi. Gdzie niemal na pewno NIE leży problem?</p>
+          <div class="quiz-options">
+            <button type="button" class="quiz-opt" data-choice="a">W Warstwie 1 (Fizycznej)</button>
+            <button type="button" class="quiz-opt" data-choice="b">W Warstwie 3 (Sieciowej / IP)</button>
+            <button type="button" class="quiz-opt" data-choice="c">W regule firewalla (L4+)</button>
+          </div>
+          <p class="quiz-feedback" hidden>
+            <strong>Odpowiedź:</strong> W <strong>Warstwie 1 (Fizycznej)</strong> — zielony link oznacza poprawną synchronizację fizyczną i wynegocjowane parametry łącza.
+          </p>
+        </article>
+
+        <article class="card quiz-card" data-question="3" data-correct="c">
+          <h3>3. Połączenie dwóch budynków (250 m)</h3>
+          <p>Dlaczego łączysz je światłowodem, a nie skrętką Cat 6A?</p>
+          <div class="quiz-options">
+            <button type="button" class="quiz-opt" data-choice="a">Bo Cat 6A nie obsługuje sieci Gigabit Ethernet</button>
+            <button type="button" class="quiz-opt" data-choice="b">Bo światłowód przekazuje zasilanie PoE</button>
+            <button type="button" class="quiz-opt" data-choice="c">Limit skrętki to 100 m; światłowód daje izolację galwaniczną i odporność na EMI</button>
+          </div>
+          <p class="quiz-feedback" hidden>
+            <strong>Odpowiedź:</strong> Standardowy zasięg skrętki to maks. <strong>100 metrów</strong>, a światłowód zapewnia dodatkowo izolację galwaniczną (ochrona przed przepięciami) i odporność na zakłócenia EMI.
+          </p>
+        </article>
+      </div>
+
+      <footer class="closing-banner">
+        <div>
+          <strong>Następne spotkanie (Zajęcia 2):</strong> Warstwa 2 — Switching, budowa ramki Ethernet, tablica MAC i VLAN-y (802.1Q).
+        </div>
+        <div class="closing-actions">
+          <button type="button" id="quiz-reset-btn" class="btn btn-ghost">Resetuj quiz</button>
+          <button type="button" id="credits-btn" class="btn btn-secondary" aria-haspopup="dialog">Źródła zdjęć (Wikimedia Commons)</button>
+        </div>
+      </footer>
+    </section>
+  </main>
+
+  <footer class="deck-controls" aria-label="Nawigacja po slajdach">
+    <button type="button" id="prev-btn" class="btn btn-secondary">← Poprzedni</button>
+
+    <div class="progress-wrap">
+      <div class="progress-track" aria-hidden="true">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+      <span class="kbd-hint">Nawigacja: <kbd>←</kbd> <kbd>→</kbd> lub <kbd>PageUp</kbd> / <kbd>PageDown</kbd></span>
+    </div>
+
+    <button type="button" id="next-btn" class="btn btn-primary">Następny →</button>
+  </footer>
+
+  <!-- DIALOG: SPIS SLAJDÓW -->
+  <dialog id="overview-dialog" class="modal" closedby="any" aria-labelledby="overview-title">
+    <div class="modal-header">
+      <h2 id="overview-title">Spis slajdów — Zajęcia 1</h2>
+      <form method="dialog">
+        <button type="submit" class="btn btn-ghost" aria-label="Zamknij spis slajdów">Zamknij ✕</button>
+      </form>
+    </div>
+    <ol id="overview-list" class="overview-grid"></ol>
+  </dialog>
+
+  <!-- DIALOG: ZOOM ZDJĘCIA -->
+  <dialog id="lightbox-dialog" class="modal modal--lightbox" closedby="any" aria-labelledby="lightbox-caption">
+    <div class="modal-header">
+      <p id="lightbox-caption" class="lightbox-title">Podgląd zdjęcia</p>
+      <form method="dialog">
+        <button type="submit" class="btn btn-ghost" aria-label="Zamknij podgląd zdjęcia">Zamknij ✕</button>
+      </form>
+    </div>
+    <img id="lightbox-img" src="media/prezentacja_1/hero-rack-switches.jpg" alt="" width="1280" height="960">
+  </dialog>
+
+  <!-- DIALOG: ŹRÓDŁA ZDJĘĆ -->
+  <dialog id="credits-dialog" class="modal" closedby="any" aria-labelledby="credits-title">
+    <div class="modal-header">
+      <h2 id="credits-title">Źródła zdjęć (Wikimedia Commons)</h2>
+      <form method="dialog">
+        <button type="submit" class="btn btn-ghost" aria-label="Zamknij listę źródeł">Zamknij ✕</button>
+      </form>
+    </div>
+    <p class="muted">Wszystkie fotografie pochodzą z otwartych zasobów Wikimedia Commons:</p>
+    <ul class="credits-list">
+      <li><strong>Szafa rack i panele krosowe:</strong> <cite>19-inch rackmount Ethernet switches and patch panels.jpg</cite> — Dsimic (CC BY-SA 4.0)</li>
+      <li><strong>Przełączniki Cisco Catalyst w racku:</strong> <cite>Cisco Catalyst 2950 network switches in situ - IMG 1076.jpg</cite> — Jemimus (CC BY 2.0)</li>
+      <li><strong>Porty switcha z diodami LINK/ACT:</strong> <cite>Network cables and switch.jpg</cite> — ProjectManhattan (CC BY-SA 3.0)</li>
+      <li><strong>Hub Netgear DS108 (dioda Col):</strong> <cite>Netgear DS108 Hub.jpg</cite> — www.heimnetzwerke.net (CC BY 4.0)</li>
+      <li><strong>Trójnik BNC (10BASE2):</strong> <cite>BNC Tee connector, with Ethernet cable connected-92166.jpg</cite> — Raimond Spekking (CC BY-SA 4.0)</li>
+      <li><strong>Kabel konsolowy Cisco (Rollover):</strong> <cite>CiscoConsoleCable.jpg</cite> — Pries (CC BY-SA 4.0)</li>
+      <li><strong>Przekrój UTP Cat6:</strong> <cite>Cross section of a Cat6 patch cable.jpg</cite> — TubeTimeUS (CC BY-SA 4.0)</li>
+      <li><strong>Przekrój FTP/STP Cat6:</strong> <cite>Cross section of a shielded Cat6 patch cable.jpg</cite> — TubeTimeUS (CC BY-SA 4.0)</li>
+      <li><strong>Wtyk RJ-45 T568B:</strong> <cite>Stecker RJ45 568B.jpg</cite> — Markus Bärlocher (CC0)</li>
+      <li><strong>Patchcordy SMF i MMF LC:</strong> <cite>Cordons monomode-multimode LC.JPG</cite> — Christophe.Finot (CC BY-SA 3.0)</li>
+      <li><strong>Złącza światłowodowe LC i SC:</strong> <cite>Lc-sc-fiber-connectors.jpg</cite> — Wikimedia Commons (CC BY-SA 3.0)</li>
+      <li><strong>Moduł SFP (Class 1 Laser 850nm):</strong> <cite>Multi mode sfp transceiver IMGP7820 wp.jpg</cite> — smial (FAL)</li>
+      <li><strong>Zestaw narzędzi i tester RJ-45:</strong> <cite>Cable stripper, cable tester (RJ45, RJ11), LSA-Tool and crimping tool.jpg</cite> — www.heimnetzwerke.net (CC BY 4.0)</li>
+    </ul>
+  </dialog>
+</body>
+</html>
