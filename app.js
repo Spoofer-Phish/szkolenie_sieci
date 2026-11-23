@@ -263,7 +263,7 @@
     if (!scrollMode) goToSlide(idx, { updateHash: false });
   });
 
-  // Interactive Mini-Quiz (Slide 15)
+  // Interactive Mini-Quiz (Slide 16)
   const quizCards = document.querySelectorAll(".quiz-card");
   quizCards.forEach((card) => {
     const correctChoice = card.dataset.correct;

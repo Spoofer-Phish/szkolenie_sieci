@@ -47,7 +47,7 @@
     --danger-soft: #fee2e2;
 
     --focus-ring: #db2777;
-    --progress-pct: 6.67%;
+    --progress-pct: 6.25%;
 
     @media (prefers-color-scheme: dark) {
       --bg-canvas: #090e1a;

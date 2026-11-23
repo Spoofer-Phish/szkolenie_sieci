@@ -33,7 +33,7 @@
       </button>
 
       <button type="button" id="overview-btn" class="btn btn-ghost" aria-haspopup="dialog">
-        Spis slajdów (<span id="slide-counter">1 / 15</span>)
+        Spis slajdów (<span id="slide-counter">1 / 16</span>)
       </button>
 
       <button type="button" id="theme-toggle-btn" class="btn btn-icon" aria-label="Zmień motyw kolorystyczny">
@@ -209,11 +209,62 @@
       </div>
     </section>
 
-    <!-- SLAJD 4: PO CO SIECI I SKALE SIECI -->
-    <section id="slajd-4" class="slide" data-slide="4" data-title="Zadania sieci, 4 filary CCNA i rodzaje sieci" hidden inert>
+    <!-- SLAJD 4: CZYM SĄ SIECI I JAKIE ZADANIA SPEŁNIAJĄ -->
+    <section id="slajd-4" class="slide" data-slide="4" data-title="Czym są sieci i jakie zadania spełniają?" hidden inert>
+      <div class="slide-header">
+        <p class="eyebrow">00:10 – 00:20 • Wprowadzenie do sieci</p>
+        <h2 tabindex="-1">Czym są sieci komputerowe i jakie zadania spełniają?</h2>
+      </div>
+
+      <div class="slide-grid slide-grid--two-col">
+        <div class="content-stack">
+          <article class="card card--accent">
+            <h3>Czym w ogóle jest sieć komputerowa?</h3>
+            <p class="lead">
+              <strong>Sieć komputerowa</strong> to zbiór co najmniej dwóch urządzeń (hostów) połączonych ze sobą w celu
+              <strong>wymiany danych i współdzielenia zasobów</strong> według wspólnych reguł komunikacji.
+            </p>
+            <ul class="compact-list note-line">
+              <li><strong>Urządzenia:</strong> końcowe (PC, serwery, smartfony, IoT) oraz pośredniczące (switche, routery, punkty dostępowe).</li>
+              <li><strong>Medium transmisyjne:</strong> kabel miedziany, światłowód albo fale radiowe (Wi-Fi) — fizyczna droga dla bitów.</li>
+              <li><strong>Protokoły:</strong> wspólny „język” i zasady przesyłu (np. Ethernet, IP, TCP, HTTP).</li>
+            </ul>
+          </article>
+
+          <blockquote class="key-quote">
+            <p>Bez sieci każde urządzenie to odizolowana wyspa — sieć zamienia pojedyncze maszyny we współpracujący system.</p>
+          </blockquote>
+        </div>
+
+        <article class="card">
+          <h3>Jakie zadania spełnia sieć?</h3>
+          <div class="pill-grid">
+            <div class="mini-card">
+              <strong>Wymiana danych i komunikacja</strong>
+              <span>Szybkie przesyłanie plików, poczty, wiadomości, stron WWW oraz połączeń audio/wideo w czasie rzeczywistym.</span>
+            </div>
+            <div class="mini-card">
+              <strong>Współdzielenie zasobów</strong>
+              <span>Wspólny dostęp do drukarek, serwerów plików, baz danych, mocy obliczeniowej i jednego łącza Internet.</span>
+            </div>
+            <div class="mini-card">
+              <strong>Centralne zarządzanie i bezpieczeństwo</strong>
+              <span>Kontrola dostępu i logowanie użytkowników, polityki bezpieczeństwa, aktualizacje oraz automatyczne kopie zapasowe.</span>
+            </div>
+            <div class="mini-card">
+              <strong>Skalowanie i ciągłość działania</strong>
+              <span>Praca zdalna i usługi chmurowe, a także utrzymanie łączności mimo awarii pojedynczego łącza czy urządzenia.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SLAJD 5: PO CO SIECI I SKALE SIECI -->
+    <section id="slajd-5" class="slide" data-slide="5" data-title="4 filary CCNA i rodzaje sieci" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:10 – 00:20 • Fundamenty</p>
-        <h2 tabindex="-1">Po co sieci? 4 filary CCNA i skale sieci</h2>
+        <h2 tabindex="-1">4 filary niezawodnej sieci i rodzaje sieci</h2>
       </div>
 
       <div class="slide-grid slide-grid--media-right">
@@ -268,8 +319,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 5: MODEL OSI I DIAGNOSTYKA BOTTOM-UP -->
-    <section id="slajd-5" class="slide" data-slide="5" data-title="Model OSI i diagnostyka Bottom-Up" hidden inert>
+    <!-- SLAJD 6: MODEL OSI I DIAGNOSTYKA BOTTOM-UP -->
+    <section id="slajd-6" class="slide" data-slide="6" data-title="Model OSI i diagnostyka Bottom-Up" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:10 – 00:20 • Wspólny język sieciowców</p>
         <h2 tabindex="-1">Model OSI (7 warstw) i diagnostyka Bottom-Up</h2>
@@ -338,8 +389,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 6: TOPOLOGIE SIECI -->
-    <section id="slajd-6" class="slide" data-slide="6" data-title="Topologie fizyczne: historyczne vs współczesne" hidden inert>
+    <!-- SLAJD 7: TOPOLOGIE SIECI -->
+    <section id="slajd-7" class="slide" data-slide="7" data-title="Topologie fizyczne: historyczne vs współczesne" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:20 – 00:35 • Architektura połączeń</p>
         <h2 tabindex="-1">Topologie sieci: dlaczego stare upadły?</h2>
@@ -391,8 +442,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 7: TRYBY TRANSMISJI I DOMENY -->
-    <section id="slajd-7" class="slide" data-slide="7" data-title="Tryby transmisji i domeny kolizyjna vs rozgłoszeniowa" hidden inert>
+    <!-- SLAJD 8: TRYBY TRANSMISJI I DOMENY -->
+    <section id="slajd-8" class="slide" data-slide="8" data-title="Tryby transmisji i domeny kolizyjna vs rozgłoszeniowa" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:20 – 00:35 • Kluczowa teoria CCNA</p>
         <h2 tabindex="-1">Tryby transmisji oraz domeny sieciowe</h2>
@@ -437,8 +488,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 8: PRZEGLĄD URZĄDZEŃ I CYBERSEC -->
-    <section id="slajd-8" class="slide" data-slide="8" data-title="Urządzenia sieciowe i wstawka Cybersec" hidden inert>
+    <!-- SLAJD 9: PRZEGLĄD URZĄDZEŃ I CYBERSEC -->
+    <section id="slajd-9" class="slide" data-slide="9" data-title="Urządzenia sieciowe i wstawka Cybersec" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:20 – 00:35 • Sprzęt aktywny i bezpieczeństwo</p>
         <h2 tabindex="-1">Urządzenia sieciowe: od Repeatera do Routera</h2>
@@ -495,8 +546,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 9: OKABLOWANIE HISTORYCZNE I SKRĘTKA UTP/FTP -->
-    <section id="slajd-9" class="slide" data-slide="9" data-title="Kable historyczne, konsola i budowa skrętki (UTP vs FTP)" hidden inert>
+    <!-- SLAJD 10: OKABLOWANIE HISTORYCZNE I SKRĘTKA UTP/FTP -->
+    <section id="slajd-10" class="slide" data-slide="10" data-title="Kable historyczne, konsola i budowa skrętki (UTP vs FTP)" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:35 – 00:45 • Okablowanie miedziane</p>
         <h2 tabindex="-1">Kable serwisowe i fizyka skrętki (UTP vs FTP)</h2>
@@ -569,8 +620,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 10: KATEGORIE, T568A/B, AUTO-MDIX, LIMIT 100M -->
-    <section id="slajd-10" class="slide" data-slide="10" data-title="Kategorie skrętki, T568A/B, Auto-MDIX i limit 100 m" hidden inert>
+    <!-- SLAJD 11: KATEGORIE, T568A/B, AUTO-MDIX, LIMIT 100M -->
+    <section id="slajd-11" class="slide" data-slide="11" data-title="Kategorie skrętki, T568A/B, Auto-MDIX i limit 100 m" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:35 – 00:45 • Parametry miedzi</p>
         <h2 tabindex="-1">Kategorie skrętki, standardy T568A/B i limit 100 m</h2>
@@ -631,8 +682,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 11: ŚWIATŁOWODY I CYBERSEC TEMPEST -->
-    <section id="slajd-11" class="slide" data-slide="11" data-title="Światłowody SMF vs MMF, złącza LC/SC i TEMPEST" hidden inert>
+    <!-- SLAJD 12: ŚWIATŁOWODY I CYBERSEC TEMPEST -->
+    <section id="slajd-12" class="slide" data-slide="12" data-title="Światłowody SMF vs MMF, złącza LC/SC i TEMPEST" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:35 – 00:45 • Transmisja optyczna</p>
         <h2 tabindex="-1">Światłowody: SMF vs MMF, złącza i Cybersec</h2>
@@ -707,8 +758,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 12: STANDARDY L1 I MOST DO L2/L3 -->
-    <section id="slajd-12" class="slide" data-slide="12" data-title="Standardy L1 i różnica między MAC a IP" hidden inert>
+    <!-- SLAJD 13: STANDARDY L1 I MOST DO L2/L3 -->
+    <section id="slajd-13" class="slide" data-slide="13" data-title="Standardy L1 i różnica między MAC a IP" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:35 – 00:45 • Parametry łącza i adresacja</p>
         <h2 tabindex="-1">Standardy Warstwy 1 oraz most do L2/L3 (MAC vs IP)</h2>
@@ -746,8 +797,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 13: SPRZĘT W DŁOŃ (PRZERWA AKTYWNA) -->
-    <section id="slajd-13" class="slide" data-slide="13" data-title="Sprzęt w dłoń — przerwa aktywna i BHP" hidden inert>
+    <!-- SLAJD 14: SPRZĘT W DŁOŃ (PRZERWA AKTYWNA) -->
+    <section id="slajd-14" class="slide" data-slide="14" data-title="Sprzęt w dłoń — przerwa aktywna i BHP" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:45 – 00:50 • Przerwa aktywna (5 min)</p>
         <h2 tabindex="-1">„Sprzęt w dłoń” — rekwizyty na sali</h2>
@@ -805,8 +856,8 @@
       </div>
     </section>
 
-    <!-- SLAJD 14: LAB 1 W PACKET TRACERZE -->
-    <section id="slajd-14" class="slide" data-slide="14" data-title="Lab 1 w Cisco Packet Tracerze (35 min)" hidden inert>
+    <!-- SLAJD 15: LAB 1 W PACKET TRACERZE -->
+    <section id="slajd-15" class="slide" data-slide="15" data-title="Lab 1 w Cisco Packet Tracerze (35 min)" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">00:50 – 01:25 • Część praktyczna</p>
         <h2 tabindex="-1">Lab 1 w Cisco Packet Tracerze (4 etapy)</h2>
@@ -851,8 +902,8 @@
       </aside>
     </section>
 
-    <!-- SLAJD 15: MINI-QUIZ I ZAMKNIĘCIE -->
-    <section id="slajd-15" class="slide" data-slide="15" data-title="Mini-Quiz i zapowiedź Zajęć 2" hidden inert>
+    <!-- SLAJD 16: MINI-QUIZ I ZAMKNIĘCIE -->
+    <section id="slajd-16" class="slide" data-slide="16" data-title="Mini-Quiz i zapowiedź Zajęć 2" hidden inert>
       <div class="slide-header">
         <p class="eyebrow">01:25 – 01:30 • Podsumowanie</p>
         <h2 tabindex="-1">Mini-Quiz sprawdzający i zamknięcie</h2>
